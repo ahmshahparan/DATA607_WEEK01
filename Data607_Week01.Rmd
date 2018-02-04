@@ -1,0 +1,90 @@
+---
+title: "Data 607_Week 01 Assignment"
+author: "A H M Shahparan"
+date: "2/3/2018"
+output: html_document
+---
+
+##Task<br />
+Our task is to study the famous Mushrooms Dataset and the associated description of the data (i.e. “data dictionary”). We should take the data, and create a data frame with a subset of the columns in the dataset. We should include the column that indicates edible or poisonous and three or four other columns. We should also add meaningful column names and replace the abbreviations used in the data—for example, in the appropriate column, “e” might become “edible.” Our deliverable is the R code to perform these transformation tasks.
+
+##01. Loading Mushrooms Dataset<br />
+Dataset Source: https://archive.ics.uci.edu/ml/datasets/Mushroom
+```{r}
+mushroom <- read.table("https://raw.githubusercontent.com/ahmshahparan/DATA607_WEEK01/master/agaricus-lepiota.data", sep=",")
+head(mushroom)
+```
+
+##02. Subsetting the Dataset<br />
+```{r}
+dataSubset <- subset(mushroom, select = c(V1,V2,V4,V6,V22,V23))
+head(dataSubset)
+```
+
+##03. Renaming the Column names<br />
+```{r}
+colnames(dataSubset) <- c("V1"="Class", "V2"="Cap-Shape", "V4"="Cap-Color", "V6"="Odor", "V22"="Population","V23"="Habitat")
+head(dataSubset)
+```
+
+##04. Replacing the Attributes' abbreviations<br />
+```{r}
+levels(dataSubset$Class) <- c(levels(dataSubset$Class), "edible", "poisonous")
+dataSubset$Class[dataSubset$Class == 'e'] <- 'edible'
+dataSubset$Class[dataSubset$Class == 'p'] <- 'poisonous'
+
+levels(dataSubset$`Cap-Shape`) <- c(levels(dataSubset$`Cap-Shape`), "bell", "conical", "convex", "flat", "knobbed", "sunken")
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 'b'] <- 'bell'
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 'c'] <- 'conical'
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 'x'] <- 'convex'
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 'f'] <- 'flat'
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 'k'] <- 'knobbed'
+dataSubset$`Cap-Shape`[dataSubset$`Cap-Shape` == 's'] <- 'sunken'
+
+
+levels(dataSubset$`Cap-Color`) <- c(levels(dataSubset$`Cap-Color`), "brown", "buff", "cinnamon", "gray", "green", "pink", "purple", "red", "white", "yellow")
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'n'] <- 'brown'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'b'] <- 'buff'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'c'] <- 'cinnamon'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'g'] <- 'gray'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'r'] <- 'green'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'p'] <- 'pink'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'u'] <- 'purple'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'e'] <- 'red'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'w'] <- 'white'
+dataSubset$`Cap-Color`[dataSubset$`Cap-Color` == 'y'] <- 'yellow'
+
+levels(dataSubset$Odor) <- c(levels(dataSubset$Odor), "almond", "anise", "creosote", "fishy", "foul", "musty", "none", "pungent", "spicy")
+dataSubset$Odor[dataSubset$Odor == 'a'] <- 'almond'
+dataSubset$Odor[dataSubset$Odor == 'l'] <- 'anise'
+dataSubset$Odor[dataSubset$Odor == 'c'] <- 'creosote'
+dataSubset$Odor[dataSubset$Odor == 'y'] <- 'fishy'
+dataSubset$Odor[dataSubset$Odor == 'f'] <- 'foul'
+dataSubset$Odor[dataSubset$Odor == 'm'] <- 'musty'
+dataSubset$Odor[dataSubset$Odor == 'n'] <- 'none'
+dataSubset$Odor[dataSubset$Odor == 'p'] <- 'pungent'
+dataSubset$Odor[dataSubset$Odor == 's'] <- 'spicy'
+
+levels(dataSubset$Population) <- c(levels(dataSubset$Population), "scattered", "numerous", "abundant", "clustered", "several", "solitary")
+dataSubset$Population[dataSubset$Population == 's'] <- 'scattered'
+dataSubset$Population[dataSubset$Population == 'n'] <- 'numerous'
+dataSubset$Population[dataSubset$Population == 'a'] <- 'abundant'
+dataSubset$Population[dataSubset$Population == 'c'] <- 'clustered'
+dataSubset$Population[dataSubset$Population == 'v'] <- 'several'
+dataSubset$Population[dataSubset$Population == 'y'] <- 'solitary'
+
+levels(dataSubset$Habitat) <- c(levels(dataSubset$Habitat), "grasses", "leaves", "meadows", "paths", "urban", "waste", "woods")
+dataSubset$Habitat[dataSubset$Habitat == 'g'] <- 'grasses'
+dataSubset$Habitat[dataSubset$Habitat == 'l'] <- 'leaves'
+dataSubset$Habitat[dataSubset$Habitat == 'm'] <- 'meadows'
+dataSubset$Habitat[dataSubset$Habitat == 'p'] <- 'paths'
+dataSubset$Habitat[dataSubset$Habitat == 'u'] <- 'urban'
+dataSubset$Habitat[dataSubset$Habitat == 'w'] <- 'waste'
+dataSubset$Habitat[dataSubset$Habitat == 'd'] <- 'woods'
+```
+
+##05. Transformed Dataset<br />
+```{r}
+head(dataSubset)
+```
+
